@@ -10,8 +10,7 @@ function Gui (client) {
       const pad = document.createElement('canvas')
       pad.width = 100
       pad.height = 80
-      pad.id = `pad_${client.rack.parts[id]}`
-      pad.className = `pad ${client.rack.parts[id]}`
+      pad.className = `pad`
       this.pads.push(pad)
       this.el.appendChild(pad)
     }

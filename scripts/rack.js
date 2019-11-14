@@ -3,7 +3,6 @@
 function Rack (client) {
   this.el = document.createElement('div')
   this.el.id = 'rack'
-  this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4']
   this.kits = []
   this.pads = []
 
@@ -31,7 +30,7 @@ function Rack (client) {
 
   this.add = (name) => {
     console.log('Rack', 'Adding ' + name)
-    const kit = new Kit(client, this, this.kits.length, name)
+    const kit = new DrumKit(client, this, this.kits.length, name)
     this.kits.push(kit)
   }
 

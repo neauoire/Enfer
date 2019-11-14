@@ -31,6 +31,10 @@ function Client () {
     this.acels.set('Play', 'Test Midi', '5', () => { this.rack.play(this.channel, 13) })
     this.acels.set('Play', 'Test Midi', '6', () => { this.rack.play(this.channel, 14) })
     this.acels.set('Play', 'Test Midi', '7', () => { this.rack.play(this.channel, 15) })
+
+    this.acels.set('Play', 'Next', ']', () => { this.modChannel(1) })
+    this.acels.set('Play', 'Prev', '[', () => { this.modChannel(-1) })
+
     this.acels.install(window)
     this.gui.install(this.el)
     this.rack.install(this.el)
@@ -39,6 +43,11 @@ function Client () {
   this.start = () => {
     console.info('Client', 'Starting..')
     console.info(`${this.acels}`)
+  }
+
+  this.modChannel = (mod) => {
+    this.channel += mod
+    console.log('Channel',this.channel)
   }
 
   this.test = () => {

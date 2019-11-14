@@ -2,7 +2,8 @@
 
 /* global Tone */
 
-function Kit (client, rack, id, name) {
+function DrumKit (client, rack, id, name) {
+  this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4']
   this.buffers = {}
 
   this.voices = [
@@ -14,8 +15,8 @@ function Kit (client, rack, id, name) {
 
   this.install = (host) => {
     console.log(name, 'Loading..')
-    for (const id in rack.parts) {
-      this.load(id, rack.parts[id])
+    for (const id in this.parts) {
+      this.load(id, this.parts[id])
     }
     for (const voice of this.voices) {
       voice.toMaster()
@@ -36,8 +37,8 @@ function Kit (client, rack, id, name) {
   }
 
   this.play = (pad, vel) => {
-    const buffer = this.buffers[rack.parts[pad]]
-    if (!buffer) { console.warn(name, 'Unknown pad: ' + rack.parts[pad]); return }
+    const buffer = this.buffers[this.parts[pad]]
+    if (!buffer) { console.warn(name, 'Unknown pad: ' + this.parts[pad]); return }
     const voice = this.voices[Math.floor(pad / 4)]
     voice.buffer = buffer
     voice.start()
