@@ -1,0 +1,34 @@
+{
+  "name": "enfer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neauoire/Enfer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neauoire/Enfer/issues"
+  },
+  "homepage": "https://github.com/neauoire/Enfer#readme",
+  "standard": {
+    "globals": [
+      "terminal",
+      "localStorage",
+      "DOMParser",
+      "onMessage",
+      "postMessage",
+      "FileReader",
+      "performance",
+      "Worker"
+    ],
+    "ignore": [
+      "scripts/lib/tone.js"
+    ]
+  }
+}
