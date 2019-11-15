@@ -3,7 +3,7 @@
 /* global Tone */
 /* global client */
 
-function DrumKit (name) {
+function SampleKit (name) {
   this.name = name
   this.isReady = false
   this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4']
@@ -28,10 +28,15 @@ function DrumKit (name) {
 
   this.connect = (mixer) => {
     console.log(name, 'connecting..')
-    this.voices[0].connect(mixer.inputs[0])
-    this.voices[1].connect(mixer.inputs[1])
-    this.voices[2].connect(mixer.inputs[2])
-    this.voices[3].connect(mixer.inputs[3])
+    this.voices[0].connect(this.reverb)
+    this.voices[1].connect(this.reverb)
+    this.voices[2].connect(this.reverb)
+    this.voices[3].connect(this.reverb)
+    this.reverb.generate()
+    this.reverb.wet.value = 0.25
+    this.freeverb.wet.value = 0.25
+    this.reverb.connect(this.freeverb)
+    this.freeverb.toMaster()
   }
 
   this.load = (pad, part) => {
