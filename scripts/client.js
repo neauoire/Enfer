@@ -2,6 +2,9 @@
 
 /* global Tone */
 /* global Acels */
+/* global Rack */
+/* global Mixer */
+/* global Gui */
 
 function Client () {
   this.el = document.createElement('div')
@@ -9,9 +12,10 @@ function Client () {
   this.acels = new Acels(this)
 
   this.rack = new Rack(this)
+  this.mixer = new Mixer(this)
   this.gui = new Gui(this)
 
-  this.channel = 4
+  this.channel = 1
 
   this.install = (host = document.body) => {
     host.appendChild(this.el)
@@ -37,6 +41,7 @@ function Client () {
 
     this.acels.install(window)
     this.gui.install(this.el)
+    this.mixer.install(this.el)
     this.rack.install(this.el)
   }
 
@@ -47,13 +52,6 @@ function Client () {
 
   this.modChannel = (mod) => {
     this.channel += mod
-    console.log('Channel',this.channel)
-  }
-
-  this.test = () => {
-    var synth = new Tone.Synth().toMaster()
-
-    // play a middle 'C' for the duration of an 8th note
-    synth.triggerAttackRelease('C4', '8n')
+    console.log('Channel', this.channel)
   }
 }

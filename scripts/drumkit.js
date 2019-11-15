@@ -1,10 +1,15 @@
 'use strict'
 
 /* global Tone */
+/* global client */
 
-function DrumKit (client, rack, id, name) {
+function DrumKit (name) {
+  this.name = name
+  this.isReady = false
   this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4']
   this.buffers = {}
+
+  this.reverb = new Tone.Reverb()
 
   this.voices = [
     new Tone.Player(),
@@ -18,21 +23,27 @@ function DrumKit (client, rack, id, name) {
     for (const id in this.parts) {
       this.load(id, this.parts[id])
     }
-    for (const voice of this.voices) {
-      voice.toMaster()
-    }
   }
 
   this.start = () => {
   }
 
+  this.connect = (mixer) => {
+    console.log('???')
+    console.log(name, 'connecting..')
+    this.voices[0].connect(this.reverb)
+    this.voices[1].connect(this.reverb)
+    this.voices[2].connect(this.reverb)
+    this.voices[3].connect(this.reverb)
+    this.reverb.generate()
+    this.reverb.toMaster()
+  }
+
   this.load = (pad, part) => {
     const url = `./media/${name}/${part}.wav`
-    client.gui.debug(id, pad, 'red')
     var buffer = new Tone.Buffer(url, () => {
-      console.log(name, part, 'length:', buffer.length)
       this.buffers[part] = buffer.get()
-      client.gui.debug(id, pad, 'green')
+      this.check()
     })
   }
 
@@ -45,6 +56,9 @@ function DrumKit (client, rack, id, name) {
   }
 
   this.check = () => {
-    console.log(name, `${Object.keys(this.buffers).length}/16`)
+    if (Object.keys(this.buffers).length === 16) {
+      this.isReady = true
+      client.rack.update()
+    }
   }
 }
