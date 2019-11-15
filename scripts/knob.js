@@ -1,6 +1,6 @@
 'use strict'
 
-function Knob (name,source,key) {
+function Knob (name, source, key) {
   this.el = document.createElement('input')
   this.el.setAttribute('type', 'range')
   this.el.setAttribute('min', '0')
@@ -8,7 +8,7 @@ function Knob (name,source,key) {
   this.el.setAttribute('value', '50')
 
   this.el.oninput = () => {
-    source[key] = parseInt(this.el.value)/100
-    console.log(name, this.el.value+'%',source[key])
+    source[key] = parseInt(this.el.value) / 100
+    console.log(name, this.el.value + '%', source[key])
   }
 }
