@@ -15,16 +15,16 @@ function Rack (client) {
     host.appendChild(this.el)
 
     // Drum Kits
-    // this.add(new DrumKit('tr808'))
-    // this.add(new DrumKit('tr909'))
-    // this.add(new DrumKit('dmx'))
-    // this.add(new DrumKit('dnb'))
-    // this.add(new DrumKit('dark'))
-    // this.add(new DrumKit('deep'))
-    // this.add(new DrumKit('tech'))
-    // this.add(new DrumKit('modular'))
-    // this.add(new DrumKit('gabber'))
-    // this.add(new DrumKit('bergh'))
+    this.add(new DrumKit('tr808'))
+    this.add(new DrumKit('tr909'))
+    this.add(new DrumKit('dmx'))
+    this.add(new DrumKit('dnb'))
+    this.add(new DrumKit('dark'))
+    this.add(new DrumKit('deep'))
+    this.add(new DrumKit('tech'))
+    this.add(new DrumKit('modular'))
+    this.add(new DrumKit('gabber'))
+    this.add(new DrumKit('bergh'))
 
     this.add(new SynthKit('tr808'))
     this.add(new SynthKit('tr909'))
@@ -71,6 +71,6 @@ function Rack (client) {
   this.play = (ch, pad, vel = 127) => {
     if (!this.isReady) { console.log('Rack', 'Still loading..'); return }
     if (!this.kits[ch]) { console.warn('Rack', 'Missing kit ', ch); return }
-    this.kits[ch].play(pad % 16, vel)
+    this.kits[ch].play(pad, vel)
   }
 }

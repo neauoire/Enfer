@@ -41,7 +41,8 @@ function DrumKit (name) {
     })
   }
 
-  this.play = (pad, vel) => {
+  this.play = (note, vel) => {
+    const pad = note % 16
     const buffer = this.buffers[this.parts[pad]]
     if (!buffer) { console.warn(name, 'Unknown pad: ' + this.parts[pad]); return }
     const voice = this.voices[Math.floor(pad / 4)]

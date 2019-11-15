@@ -35,9 +35,12 @@ function SynthKit (name) {
     })
   }
 
-  this.play = (pad, vel) => {
-    const notes = ['C2', 'C#2', 'D2', 'D#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2', 'C3', 'C#3']
-    this.voice.triggerAttack(notes[pad % notes.length])
+  this.play = (note, vel) => {
+    const pad = note % 12
+    const oct = Math.floor(note / 12)
+    const notes = ['C', 'C#', 'D', 'D#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+    const code = `${notes[pad]}${oct}`
+    this.voice.triggerAttack(code)
   }
 
   this.check = () => {
