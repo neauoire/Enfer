@@ -1,6 +1,7 @@
 'use strict'
 
 /* global Tone */
+/* global Analyzer */
 /* global Knob */
 
 function Mixer (client) {
@@ -33,8 +34,8 @@ function Mixer (client) {
   this.knobs = {}
   this.knobs.cheby = new Knob('cheby', this.cheby.wet, 'value', 0, 0.5)
   this.knobs.chorus = new Knob('chorus', this.chorus.wet, 'value', 0, 1)
-  this.knobs['revera-dw'] = new Knob('revera-dw', this.revera.wet, 'value', 0, 0.1)
-  this.knobs['reverb-dw'] = new Knob('reverb-dw', this.reverb.wet, 'value', 0, 0.1)
+  this.knobs['revera-dw'] = new Knob('revera-dw', this.revera.wet, 'value', 0, 0.3)
+  this.knobs['reverb-dw'] = new Knob('reverb-dw', this.reverb.wet, 'value', 0, 0.3)
   this.knobs['eq-high'] = new Knob('eq-high', this.eq.high, 'value', -25, 10, 1)
   this.knobs['eq-low'] = new Knob('eq-low', this.eq.low, 'value', -25, 10, 1)
   this.knobs.compressor = new Knob('compressor', this.compressor.threshold, 'value', -30, -15)

@@ -27,7 +27,6 @@ function DrumKit (name) {
   }
 
   this.connect = (mixer) => {
-    console.log(name, 'connecting..')
     this.voices[0].connect(mixer.inputs[0])
     this.voices[1].connect(mixer.inputs[1])
     this.voices[2].connect(mixer.inputs[2])

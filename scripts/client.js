@@ -14,7 +14,6 @@ function Client () {
   this.io = new IO(this)
   this.rack = new Rack(this)
   this.mixer = new Mixer(this)
-  this.gui = new Gui(this)
 
   this.channel = 1
 
@@ -41,7 +40,6 @@ function Client () {
     this.acels.set('Play', 'Prev', '[', () => { this.modChannel(-1) })
 
     this.acels.install(window)
-    this.gui.install(this.el)
     this.mixer.install(this.el)
     this.rack.install(this.el)
     this.io.install(this.el)

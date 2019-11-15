@@ -1,6 +1,7 @@
 'use strict'
 
 /* global DrumKit */
+/* global SynthKit */
 
 function Rack (client) {
   this.el = document.createElement('div')
@@ -14,8 +15,8 @@ function Rack (client) {
     host.appendChild(this.el)
 
     // Drum Kits
-    this.add(new DrumKit('tr808'))
-    this.add(new DrumKit('tr909'))
+    // this.add(new DrumKit('tr808'))
+    // this.add(new DrumKit('tr909'))
     // this.add(new DrumKit('dmx'))
     // this.add(new DrumKit('dnb'))
     // this.add(new DrumKit('dark'))
@@ -24,6 +25,13 @@ function Rack (client) {
     // this.add(new DrumKit('modular'))
     // this.add(new DrumKit('gabber'))
     // this.add(new DrumKit('bergh'))
+
+    this.add(new SynthKit('tr808'))
+    this.add(new SynthKit('tr909'))
+    this.add(new SynthKit('dmx'))
+    this.add(new SynthKit('dnb'))
+    this.add(new SynthKit('dark'))
+    this.add(new SynthKit('deep'))
 
     // Sampler Kits
 
@@ -41,6 +49,7 @@ function Rack (client) {
     console.log('Starting')
 
     for (const kit of this.kits) {
+      kit.start()
       kit.connect(client.mixer)
     }
     client.mixer.start()

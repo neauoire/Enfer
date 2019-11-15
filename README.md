@@ -1,7 +1,11 @@
 # Enfer
 
-## Routing
+## TODOs
 
+- Detect LPD8
+- Implement synth layersp
+
+## Routing
 
 ## Disable CORS
 
