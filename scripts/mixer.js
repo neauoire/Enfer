@@ -29,8 +29,8 @@ function Mixer (client) {
   this.install = (host) => {
     this.knobs.compressor = new Knob('compressor')
     this.knobs.filter = new Knob('filter')
-    this.knobs.chorus = new Knob('chorus')
-    this.knobs.reverb = new Knob('reverb')
+    this.knobs.chorus = new Knob('chorus', this.chorus.wet, 'value')
+    this.knobs.reverb = new Knob('reverb', this.reverb.wet, 'value')
     this.knobs.feedback = new Knob('feedback')
     this.knobs.stereo = new Knob('stereo')
 
