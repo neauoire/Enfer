@@ -44,6 +44,7 @@ function Rack (client) {
       kit.connect(client.mixer)
     }
     client.mixer.start()
+    client.io.start()
   }
 
   this.update = () => {

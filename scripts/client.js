@@ -11,6 +11,7 @@ function Client () {
 
   this.acels = new Acels(this)
 
+  this.io = new IO(this)
   this.rack = new Rack(this)
   this.mixer = new Mixer(this)
   this.gui = new Gui(this)
@@ -43,6 +44,7 @@ function Client () {
     this.gui.install(this.el)
     this.mixer.install(this.el)
     this.rack.install(this.el)
+    this.io.install(this.el)
   }
 
   this.start = () => {

@@ -6,6 +6,9 @@
 function Mixer (client) {
   this.el = document.createElement('div')
   this.el.id = 'mixer'
+  this.wrapper = document.createElement('div')
+
+  this.analyzer = new Analyzer(this)
 
   this.inputs = [
     new Tone.EQ3(0, 0, 0),
@@ -14,59 +17,70 @@ function Mixer (client) {
     new Tone.EQ3(0, 0, 0)
   ]
 
-  this.knobs = {}
+  this.cheby = new Tone.Chebyshev(50)
 
-  this.compressor = new Tone.Compressor()
-  this.filter = new Tone.Filter(10000, 'lowpass')
+  this.eq = new Tone.EQ3(0, -5, 0)
+  this.compressor = new Tone.Compressor(-12, 10)
+  this.filterh = new Tone.Filter(10000, 'highpass')
+  this.filterl = new Tone.Filter(10000, 'lowpass')
 
   this.chorus = new Tone.Chorus()
-  this.reverb = new Tone.Reverb()
-  this.freeverb = new Tone.Freeverb({ roomSize: 0.85, dampening: 5000 })
-  this.feedback = new Tone.FeedbackDelay()
+  this.revera = new Tone.Reverb({ decay: 10, preDelay: 0.01 })
+  this.reverb = new Tone.Reverb({ decay: 20, preDelay: 0.01 })
   this.stereo = new Tone.StereoWidener()
   this.limiter = new Tone.Limiter(0)
 
+  this.knobs = {}
+  this.knobs.cheby = new Knob('cheby', this.cheby.wet, 'value', 0, 0.5)
+  this.knobs.chorus = new Knob('chorus', this.chorus.wet, 'value', 0, 1)
+  this.knobs['revera-dw'] = new Knob('revera-dw', this.revera.wet, 'value', 0, 0.1)
+  this.knobs['reverb-dw'] = new Knob('reverb-dw', this.reverb.wet, 'value', 0, 0.1)
+  this.knobs['eq-high'] = new Knob('eq-high', this.eq.high, 'value', -25, 10, 1)
+  this.knobs['eq-low'] = new Knob('eq-low', this.eq.low, 'value', -25, 10, 1)
+  this.knobs.compressor = new Knob('compressor', this.compressor.threshold, 'value', -30, -15)
+  this.knobs.stereo = new Knob('stereo', this.stereo.width, 'value', 0.25, 0.75, 0.5)
+
   this.install = (host) => {
-    this.knobs.compressor = new Knob('compressor')
-    this.knobs.filter = new Knob('filter')
-    this.knobs.chorus = new Knob('chorus', this.chorus.wet, 'value')
-    this.knobs.reverb = new Knob('reverb', this.reverb.wet, 'value')
-    this.knobs.feedback = new Knob('feedback')
-    this.knobs.stereo = new Knob('stereo')
+    this.revera.generate()
+    this.reverb.generate()
 
-    this.reverb.decay = 10.0
-
-    for (const id in this.knobs) {
-      this.el.appendChild(this.knobs[id].el)
+    for (const knob of Object.values(this.knobs)) {
+      knob.install(this.wrapper)
     }
 
+    this.analyzer.install(this.el)
+
+    this.el.appendChild(this.wrapper)
     host.appendChild(this.el)
   }
 
   this.start = () => {
     console.log('Mixer', 'Start')
-    this.inputs[0].connect(this.compressor)
-    this.inputs[1].connect(this.compressor)
 
-    this.compressor.connect(this.filter)
-    this.filter.connect(this.stereo)
+    this.inputs[0].connect(this.eq)
+    this.inputs[1].connect(this.revera)
+    this.inputs[2].connect(this.reverb)
+    this.inputs[3].connect(this.cheby)
 
-    this.inputs[2].connect(this.chorus)
-    this.inputs[3].connect(this.chorus)
-
-    this.chorus.wet.value = 0.15
-    this.reverb.wet.value = 0.15
-    this.freeverb.wet.value = 0.15
-    this.feedback.wet.value = 0.15
     this.reverb.generate()
 
+    this.cheby.connect(this.revera)
+    this.revera.connect(this.chorus)
     this.chorus.connect(this.reverb)
-    this.reverb.connect(this.freeverb)
-    this.freeverb.connect(this.feedback)
-    this.feedback.connect(this.stereo)
+    this.reverb.connect(this.eq)
 
+    this.eq.connect(this.compressor)
+
+    this.compressor.connect(this.stereo)
     this.stereo.connect(this.limiter)
     this.limiter.toMaster()
+
+    this.limiter.fan(this.analyzer.waveform)
+    this.analyzer.start()
+
+    for (const id in this.knobs) {
+      this.knobs[id].start()
+    }
 
     this.update()
   }

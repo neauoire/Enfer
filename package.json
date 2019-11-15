@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "python -m SimpleHTTPServer 8000"
+    "serve": "python -m SimpleHTTPServer 8000 && firefox \"http://localhost:8000/\""
   },
   "repository": {
     "type": "git",
