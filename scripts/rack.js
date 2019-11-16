@@ -59,7 +59,6 @@ function Rack (client) {
   this.update = () => {
     for (const kit of this.kits) {
       if (!kit.isReady) {
-        console.warn('Waiting.. ', kit.name)
         return
       }
     }

@@ -1,8 +1,11 @@
 'use strict'
 
 function IO (client) {
-  this.inputs = []
+  this.devices = []
   this.index = -1
+
+  this.controller = null
+  this.source = null
 
   this.install = (host) => {
 
@@ -13,26 +16,30 @@ function IO (client) {
     console.log('IO', 'Starting..')
   }
 
-  this.device = () => {
-    return this.inputs[this.index]
-  }
+  this.connect = (source = 'Midi Through', controller = 'LPD8') => {
+    this.controller = this.find(controller)
+    this.source = this.find(source)
 
-  this.receive = (msg) => {
-    if (msg.data[0] >= 144 && msg.data[0] < 160) {
-      const ch = msg.data[0] - 144
-      const pad = msg.data[1] - 24
-      client.rack.play(ch, pad)
+    if (!this.controller) {
+      console.warn('IO', 'Could not connect ' + controller)
+    } else {
+      console.info('IO', 'Connected to controller ' + this.controller.name)
+      this.controller.onmidimessage = this.onControl
+    }
+
+    if (!this.source) {
+      console.warn('IO', 'Could not connect ' + source)
+    } else {
+      console.info('IO', 'Connected to source ' + this.source.name)
+      this.source.onmidimessage = this.onMessage
     }
   }
 
-  this.selectInput = (id) => {
-    if (this.device()) { this.device().onmidimessage = null }
-    if (id === -1) { this.index = -1; console.log('MIDI', 'Deselected Midi Device'); return }
-    if (!this.inputs[id]) { return }
-
-    this.index = id
-    this.device().onmidimessage = (msg) => { this.receive(msg) }
-    console.log('MIDI', `Select Input Device: ${this.device().name}`)
+  this.find = (name) => {
+    for (const device of this.devices) {
+      if (device.name.indexOf(name) < 0) { continue }
+      return device
+    }
   }
 
   this.refresh = () => {
@@ -42,12 +49,30 @@ function IO (client) {
     })
   }
 
+  this.list = () => {
+    for (const device of this.devices) {
+      console.info('IO', device.name)
+    }
+  }
+
+  this.onControl = (msg) => {
+    console.log('knob', msg.data)
+  }
+
+  this.onMessage = (msg) => {
+    if (msg.data[0] >= 144 && msg.data[0] < 160) {
+      const ch = msg.data[0] - 144
+      const pad = msg.data[1] - 24
+      client.rack.play(ch, pad)
+    }
+  }
+
   this.access = (midiAccess) => {
     const inputs = midiAccess.inputs.values()
-    this.inputs = []
+    this.devices = []
     for (let i = inputs.next(); i && !i.done; i = inputs.next()) {
-      this.inputs.push(i.value)
+      this.devices.push(i.value)
     }
-    this.selectInput(0)
+    this.connect()
   }
 }
