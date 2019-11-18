@@ -86,6 +86,12 @@ function Mixer (client) {
     this.update()
   }
 
+  this.tweak = (ch, knob, val) => {
+    const id = Object.keys(this.knobs)[knob]
+    if (!this.knobs[id]) { return }
+    this.knobs[id].tweak(val)
+  }
+
   this.update = () => {
   }
 }

@@ -33,4 +33,9 @@ function Knob (name, source, key, min, max, initial = 0) {
   this.el.oninput = () => {
     this.update()
   }
+
+  this.tweak = (val) => {
+    this.slider.value = parseInt((val / 127) * 100)
+    this.update()
+  }
 }

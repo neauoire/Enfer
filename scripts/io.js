@@ -65,6 +65,11 @@ function IO (client) {
       const pad = msg.data[1] - 24
       const vel = msg.data[2]
       client.rack.play(ch, pad, vel)
+    } else if (msg.data[0] >= 176 && msg.data[0] < 184) {
+      const ch = msg.data[0] - 176
+      const knob = msg.data[1] - 64
+      const val = msg.data[2]
+      client.mixer.tweak(ch, knob, val)
     }
   }
 
