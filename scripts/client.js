@@ -1,10 +1,9 @@
 'use strict'
 
-/* global Tone */
 /* global Acels */
 /* global Rack */
 /* global Mixer */
-/* global Gui */
+/* global IO */
 
 function Client () {
   this.el = document.createElement('div')

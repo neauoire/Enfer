@@ -1,6 +1,7 @@
 <html>
   <head>
     <meta charset='utf-8'>
+    <link rel="icon" href="data:">
     <script type="text/javascript" src="scripts/lib/tone.js"></script>
     <script type="text/javascript" src="scripts/lib/acels.js"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
@@ -22,9 +23,7 @@
       client.install(document.body)
     </script>
     <style>
-      #gui { width:460px; height:400px; margin:calc(50vh - 200px) auto; }
-      canvas.pad { background: black; width:100px; height:80px; display: inline-block; margin-right:15px; margin-bottom:15px; border-radius: 2px; color:#555; }
-      #mixer { position: fixed;bottom: calc(50vh - 240px);left: 50vw;margin-left: -230px;width: 445px;columns: 4;font-size: 12px; }
+      #mixer { width: 445px;font-size: 12px; }
       #analyzer { display: block; position: fixed; top:0px; left:0px; }
       canvas { image-rendering: pixelated; image-rendering: optimizeSpeed; }
       .knob {}

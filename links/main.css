@@ -1,0 +1,7 @@
+body { border:0px; background:black; color:white;font-family: 'input_mono_medium'; line-height: 20px; font-size:11px; overflow:hidden; margin-top:30px;}
+#mixer { width: 445px;font-size: 12px; }
+#analyzer { display: block; display: block;position: fixed;bottom: 30px;height: 25px;width: 200px; }
+canvas { image-rendering: pixelated; image-rendering: optimizeSpeed; }
+.knob { line-height: 17px; font-size:11px; }
+.knob .label { display: inline-block }
+.knob .slider { display: inline-block; margin-right:15px; cursor: pointer; }

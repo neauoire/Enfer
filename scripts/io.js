@@ -63,7 +63,8 @@ function IO (client) {
     if (msg.data[0] >= 144 && msg.data[0] < 160) {
       const ch = msg.data[0] - 144
       const pad = msg.data[1] - 24
-      client.rack.play(ch, pad)
+      const vel = msg.data[2]
+      client.rack.play(ch, pad, vel)
     }
   }
 

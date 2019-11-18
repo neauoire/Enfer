@@ -46,7 +46,9 @@ function DrumKit (name) {
     const buffer = this.buffers[this.parts[pad]]
     if (!buffer) { console.warn(name, 'Unknown pad: ' + this.parts[pad]); return }
     const voice = this.voices[Math.floor(pad / 4)]
+    const volume = 24 - ((vel / 127) * 24)
     voice.buffer = buffer
+    voice.volume.value = -volume
     voice.start()
   }
 

@@ -40,7 +40,7 @@ function SynthKit (name) {
     const oct = Math.floor(note / 12)
     const notes = ['C', 'C#', 'D', 'D#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     const code = `${notes[pad]}${oct}`
-    this.voice.triggerAttack(code)
+    this.voice.triggerAttack(code, undefined, vel / 127)
   }
 
   this.check = () => {

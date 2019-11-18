@@ -2,8 +2,12 @@
 
 ## TODOs
 
-- Detect LPD8
-- Implement synth layersp
+- wait for interaction
+- implement midiCC
+- improve layout
+- improve routing
+- rename cheby to wavshaper
+- Split synth pianoroll in 2 to support more samples, or reversed samples.
 
 ## Routing
 
