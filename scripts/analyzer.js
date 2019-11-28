@@ -21,7 +21,7 @@ function Analyzer (mixer) {
   }
 
   this.start = () => {
-    this.animate()
+    // this.animate()
   }
 
   this.update = () => {
