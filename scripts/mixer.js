@@ -57,10 +57,6 @@ function Mixer (client) {
     host.appendChild(this.el)
   }
 
-  this.something = (a) => {
-    console.log(a, '!!')
-  }
-
   this.start = () => {
     console.log('Mixer', 'Start')
 
@@ -96,7 +92,7 @@ function Mixer (client) {
   }
 
   this.tweak = (ch, knob, val) => {
-    const id = Object.keys(this.knobs)[knob]
+    const id = Object.keys(this.knobs)[(knob-1) % 8]
     if (!this.knobs[id]) { return }
     this.knobs[id].tweak(val)
   }

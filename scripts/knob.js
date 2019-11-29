@@ -57,7 +57,6 @@ function Knob (name, fn, min, max, initial = 0) {
   this.update = () => {
     fn(((max - min) * (this.slider.value / this.slider.max)) + min)
     this.display.textContent = this.slider.value
-
     this.circlefg.setAttribute('stroke-dashoffset', (circ * (1 - (this.slider.value / 100))) + 'px')
   }
 
