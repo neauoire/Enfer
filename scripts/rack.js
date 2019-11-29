@@ -9,7 +9,6 @@ function Rack (client) {
   this.isReady = false
 
   this.kits = []
-  this.pads = []
 
   this.install = (host) => {
     host.appendChild(this.el)

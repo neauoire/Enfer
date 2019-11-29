@@ -1,6 +1,6 @@
 'use strict'
 
-function Knob (name, source, key, min, max, initial = 0) {
+function Knob (name, fn, min, max, initial = 0) {
   this.el = document.createElement('div')
   this.el.className = 'knob'
   this.slider = document.createElement('input')
@@ -26,7 +26,7 @@ function Knob (name, source, key, min, max, initial = 0) {
   }
 
   this.update = () => {
-    source[key] = ((max - min) * (this.slider.value / this.slider.max)) + min
+    fn(((max - min) * (this.slider.value / this.slider.max)) + min)
     this.label.textContent = name + ' ' + this.slider.value + '%'
   }
 

@@ -8,6 +8,7 @@ function DrumKit (name) {
   this.isReady = false
   this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4']
   this.buffers = {}
+  this.offset = 0
 
   this.voices = [
     new Tone.Player(),
@@ -42,7 +43,7 @@ function DrumKit (name) {
   }
 
   this.play = (note, vel) => {
-    if(vel === 0){ return }
+    if (vel === 0) { return }
     const pad = note % 16
     const buffer = this.buffers[this.parts[pad]]
     if (!buffer) { console.warn(name, 'Unknown pad: ' + this.parts[pad]); return }
@@ -50,7 +51,7 @@ function DrumKit (name) {
     const volume = 36 - ((vel / 127) * 36)
     voice.buffer = buffer
     voice.volume.value = -volume
-    voice.start()
+    voice.start(undefined, this.offset)
   }
 
   this.check = () => {

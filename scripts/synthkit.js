@@ -36,7 +36,7 @@ function SynthKit (name) {
   }
 
   this.play = (note, vel) => {
-    if(vel === 0){ return }
+    if (vel === 0) { return }
     const pad = note % 12
     const oct = Math.floor(note / 12)
     const notes = ['C', 'C#', 'D', 'D#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
