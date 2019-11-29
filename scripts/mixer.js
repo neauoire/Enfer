@@ -19,7 +19,7 @@ function Mixer (client) {
   this.delay = new Tone.FeedbackDelay('6n', 0.5)
 
   this.eq = new Tone.EQ3(0, -5, 0)
-  this.compressor = new Tone.Compressor(-12, 10)
+  this.compressor = new Tone.Compressor(-15, 10)
   this.filterh = new Tone.Filter(10000, 'highpass')
   this.filterl = new Tone.Filter(10000, 'lowpass')
 
@@ -27,7 +27,7 @@ function Mixer (client) {
   this.revera = new Tone.Reverb({ decay: 10, preDelay: 0.01 })
   this.reverb = new Tone.Reverb({ decay: 20, preDelay: 0.01 })
   this.stereo = new Tone.StereoWidener()
-  this.limiter = new Tone.Limiter(0)
+  this.limiter = new Tone.Limiter(-20)
 
   this.knobs = {}
 
@@ -61,17 +61,15 @@ function Mixer (client) {
     console.log('Mixer', 'Start')
 
     this.inputs[0].connect(this.eq)
-    this.inputs[1].connect(this.revera)
-    this.inputs[2].connect(this.reverb)
+    this.inputs[1].connect(this.reverb)
+    this.inputs[2].connect(this.revera)
     this.inputs[3].connect(this.cheby)
-
-    this.reverb.generate()
 
     this.cheby.connect(this.revera)
     this.revera.connect(this.chorus)
-    this.chorus.connect(this.reverb)
-    this.reverb.connect(this.delay)
-    this.delay.connect(this.eq)
+    this.chorus.connect(this.delay)
+    this.delay.connect(this.reverb)
+    this.reverb.connect(this.eq)
 
     this.eq.connect(this.compressor)
 

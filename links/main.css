@@ -9,7 +9,7 @@
 /* Main */
 
 body { background: black; color:white; font-family: 'input_mono_medium'; font-size:11px; overflow: hidden;}
-#mixer { width: 408px;font-size: 12px; margin: 200px auto; }
+#mixer { width: 408px;font-size: 12px; margin: calc(50vh - 140px) auto; }
 canvas { image-rendering: pixelated; image-rendering: optimizeSpeed; }
 .knob { float: left;width: 100px;height: 140px; position: relative; border-bottom: 2px solid white; margin-right:2px;}
 .knob svg { padding:10px; stroke:blue; stroke-width:10px; transform: rotate(90deg); stroke-linecap: round; fill:none; margin: 10px auto;display: block; position: relative;}

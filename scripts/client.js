@@ -44,9 +44,10 @@ function Client () {
     this.io.install(this.el)
   }
 
-  this.start = () => {
+  this.start = (bpm = 120) => {
     console.info('Client', 'Starting..')
     console.info(`${this.acels}`)
+    this.mixer.setBpm(bpm)
   }
 
   this.modChannel = (mod) => {
