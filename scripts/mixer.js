@@ -1,15 +1,12 @@
 'use strict'
 
 /* global Tone */
-/* global Analyzer */
 /* global Knob */
 
 function Mixer (client) {
   this.el = document.createElement('div')
   this.el.id = 'mixer'
   this.wrapper = document.createElement('div')
-
-  this.analyzer = new Analyzer(this)
 
   this.inputs = [
     new Tone.EQ3(0, 0, 0),
@@ -19,6 +16,7 @@ function Mixer (client) {
   ]
 
   this.cheby = new Tone.Chebyshev(50)
+  this.delay = new Tone.FeedbackDelay('6n', 0.5)
 
   this.eq = new Tone.EQ3(0, -5, 0)
   this.compressor = new Tone.Compressor(-12, 10)
@@ -39,14 +37,13 @@ function Mixer (client) {
     }
   }, 0, 0.125)
 
-  this.knobs.cheby = new Knob('cheby', (v) => { this.cheby.wet.value = v }, 0, 0.5)
+  this.knobs.cheby = new Knob('shaper', (v) => { this.cheby.wet.value = v }, 0, 0.5)
+  this.knobs.delay = new Knob('delay', (v) => { this.delay.wet.value = v }, 0, 1)
   this.knobs.chorus = new Knob('chorus', (v) => { this.chorus.wet.value = v }, 0, 1)
   this.knobs['revera-dw'] = new Knob('revera-dw', (v) => { this.revera.wet.value = v }, 0, 0.3)
   this.knobs['reverb-dw'] = new Knob('reverb-dw', (v) => { this.reverb.wet.value = v }, 0, 0.3)
   this.knobs['eq-high'] = new Knob('eq-high', (v) => { this.eq.high.value = v }, -25, 10, 1)
   this.knobs['eq-low'] = new Knob('eq-low', (v) => { this.eq.low.value = v }, -25, 10, 1)
-  this.knobs.compressor = new Knob('compressor', (v) => { this.compressor.threshold.value = v }, -30, -15)
-  this.knobs.stereo = new Knob('stereo', (v) => { this.stereo.width.value = v }, 0.25, 0.75, 0.5)
 
   this.install = (host) => {
     this.revera.generate()
@@ -55,8 +52,6 @@ function Mixer (client) {
     for (const knob of Object.values(this.knobs)) {
       knob.install(this.wrapper)
     }
-
-    this.analyzer.install(this.el)
 
     this.el.appendChild(this.wrapper)
     host.appendChild(this.el)
@@ -79,7 +74,8 @@ function Mixer (client) {
     this.cheby.connect(this.revera)
     this.revera.connect(this.chorus)
     this.chorus.connect(this.reverb)
-    this.reverb.connect(this.eq)
+    this.reverb.connect(this.delay)
+    this.delay.connect(this.eq)
 
     this.eq.connect(this.compressor)
 
@@ -87,14 +83,16 @@ function Mixer (client) {
     this.stereo.connect(this.limiter)
     this.limiter.toMaster()
 
-    this.limiter.fan(this.analyzer.waveform)
-    this.analyzer.start()
-
     for (const id in this.knobs) {
       this.knobs[id].start()
     }
 
     this.update()
+  }
+
+  this.setBpm = (bpm) => {
+    console.log('Mixer', 'BPM', bpm)
+    Tone.Transport.bpm.rampTo(128, 2)
   }
 
   this.tweak = (ch, knob, val) => {
