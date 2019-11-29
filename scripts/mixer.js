@@ -92,7 +92,7 @@ function Mixer (client) {
   }
 
   this.tweak = (ch, knob, val) => {
-    const id = Object.keys(this.knobs)[(knob-1) % 8]
+    const id = Object.keys(this.knobs)[(knob - 1) % 8]
     if (!this.knobs[id]) { return }
     this.knobs[id].tweak(val)
   }
