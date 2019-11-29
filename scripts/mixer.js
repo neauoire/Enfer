@@ -15,7 +15,7 @@ function Mixer (client) {
     new Tone.EQ3(0, 0, 0)
   ]
 
-  this.cheby = new Tone.Chebyshev(50)
+  this.cheby = new Tone.Chebyshev(5)
   this.delay = new Tone.FeedbackDelay('6n', 0.5)
 
   this.eq = new Tone.EQ3(0, -5, 0)
