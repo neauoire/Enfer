@@ -24,13 +24,9 @@ function Rack (client) {
     this.add(new DrumKit('modular'))
     this.add(new DrumKit('gabber'))
     this.add(new DrumKit('bergh'))
-
-    this.add(new SynthKit('tr808'))
-    this.add(new SynthKit('tr909'))
-    this.add(new SynthKit('dmx'))
-    this.add(new SynthKit('dnb'))
-    this.add(new SynthKit('dark'))
-    this.add(new SynthKit('deep'))
+    this.add(new DrumKit('vermona'))
+    this.add(new DrumKit('commodore'))
+    this.add(new DrumKit('dmg'))
 
     // Sampler Kits
 
