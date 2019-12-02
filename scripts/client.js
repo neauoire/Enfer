@@ -14,7 +14,7 @@ function Client () {
   this.rack = new Rack(this)
   this.mixer = new Mixer(this)
 
-  this.channel = 1
+  this.channel = 0
 
   this.install = (host = document.body) => {
     host.appendChild(this.el)
@@ -52,6 +52,7 @@ function Client () {
 
   this.modChannel = (mod) => {
     this.channel += mod
+    this.channel = this.channel % 16
     console.log('Channel', this.channel)
   }
 }
