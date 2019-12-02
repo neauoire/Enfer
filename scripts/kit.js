@@ -3,7 +3,7 @@
 /* global Tone */
 /* global client */
 
-function DrumKit (name) {
+function Kit (name) {
   this.name = name
   this.isReady = false
   this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4','sampler']

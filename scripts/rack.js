@@ -14,19 +14,19 @@ function Rack (client) {
     host.appendChild(this.el)
 
     // Drum Kits
-    this.add(new DrumKit('tr808'))
-    this.add(new DrumKit('tr909'))
-    this.add(new DrumKit('dmx'))
-    this.add(new DrumKit('dnb'))
-    this.add(new DrumKit('dark'))
-    this.add(new DrumKit('deep'))
-    this.add(new DrumKit('tech'))
-    this.add(new DrumKit('modular'))
-    this.add(new DrumKit('gabber'))
-    this.add(new DrumKit('bergh'))
-    this.add(new DrumKit('vermona'))
-    this.add(new DrumKit('commodore'))
-    this.add(new DrumKit('dmg'))
+    this.add(new Kit('tr808'))
+    this.add(new Kit('tr909'))
+    this.add(new Kit('dmx'))
+    this.add(new Kit('dnb'))
+    this.add(new Kit('dark'))
+    this.add(new Kit('deep'))
+    this.add(new Kit('tech'))
+    this.add(new Kit('modular'))
+    this.add(new Kit('gabber'))
+    this.add(new Kit('bergh'))
+    this.add(new Kit('vermona'))
+    this.add(new Kit('commodore'))
+    this.add(new Kit('dmg'))
 
     // Sampler Kits
 
