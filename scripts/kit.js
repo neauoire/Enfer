@@ -26,7 +26,7 @@ function Kit (name) {
   }
 
   this.start = () => {
-    this.voices[4].add('C3', this.buffers.sampler)
+    this.voices[4].add('C4', this.buffers.sampler)
   }
 
   this.connect = (mixer) => {
