@@ -1,29 +1,3 @@
 # Enfer
 
-## TODOs
-
-- wait for interaction
-- implement midiCC
-- improve layout
-- improve routing
-- rename cheby to wavshaper
-- Split synth pianoroll in 2 to support more samples, or reversed samples.
-
-## Routing
-
-## Disable CORS
-
-In firefox
-
-```
-about:config
-file.unique_origin = false
-```
-
-## Or run a server
-
-At `http://localhost:8000/`
-
-```
-python -m SimpleHTTPServer 8000
-```
+A small web-based synth designed to be operated by [Orca](https://github.com/hundredrabbits/orca) and [LPD8](https://wiki.xxiivv.com/studio). More details shortly.
