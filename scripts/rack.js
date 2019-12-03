@@ -23,9 +23,9 @@ function Rack (client) {
     this.add(new Kit('modular'))
     this.add(new Kit('gabber'))
     this.add(new Kit('bergh'))
-    // this.add(new Kit('vermona'))
-    // this.add(new Kit('commodore'))
-    // this.add(new Kit('dmg'))
+    this.add(new Kit('vermona'))
+    this.add(new Kit('commodore'))
+    this.add(new Kit('dmg'))
 
     // Sampler Kits
 

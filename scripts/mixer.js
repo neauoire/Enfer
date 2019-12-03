@@ -41,7 +41,7 @@ function Mixer (client) {
     for (const kit of client.rack.kits) {
       kit.length = v
     }
-  }, 0, 2.0, 1.0)
+  }, 0, 1.0, 0.25)
 
   this.knobs.cheby = new Knob('shaper', (v) => { this.cheby.wet.value = v }, 0, 0.5)
   this.knobs.delay = new Knob('delay', (v) => { this.delay.wet.value = v }, 0, 1)
