@@ -37,13 +37,22 @@ function Mixer (client) {
     }
   }, 0, 0.125)
 
+  this.knobs.length = new Knob('length', (v) => {
+    for (const kit of client.rack.kits) {
+      kit.length = v
+    }
+  }, 0, 2.0, 1.0)
+
   this.knobs.cheby = new Knob('shaper', (v) => { this.cheby.wet.value = v }, 0, 0.5)
   this.knobs.delay = new Knob('delay', (v) => { this.delay.wet.value = v }, 0, 1)
-  this.knobs.chorus = new Knob('chorus', (v) => { this.chorus.wet.value = v }, 0, 1)
-  this.knobs['revera-dw'] = new Knob('revera-dw', (v) => { this.revera.wet.value = v }, 0, 0.3)
-  this.knobs['reverb-dw'] = new Knob('reverb-dw', (v) => { this.reverb.wet.value = v }, 0, 0.3)
-  this.knobs['eq-high'] = new Knob('eq-high', (v) => { this.eq.high.value = v }, -25, 10, 1)
-  this.knobs['eq-low'] = new Knob('eq-low', (v) => { this.eq.low.value = v }, -25, 10, 1)
+  this.knobs.chorus = new Knob('chorus', (v) => { this.chorus.wet.value = v }, 0, 1, 0.1)
+  this.knobs['revera-dw'] = new Knob('revera-dw', (v) => { this.revera.wet.value = v }, 0, 0.3, 0.1)
+  this.knobs['reverb-dw'] = new Knob('reverb-dw', (v) => { this.reverb.wet.value = v }, 0, 0.3, 0.1)
+
+  this.knobs.eq = new Knob('eq-high', (v) => {
+    this.eq.low.value = -v
+    this.eq.high.value = v
+  }, -10, 10, 0.5)
 
   this.install = (host) => {
     this.revera.generate()

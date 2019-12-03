@@ -1,7 +1,6 @@
 'use strict'
 
-/* global DrumKit */
-/* global SynthKit */
+/* global Kit */
 
 function Rack (client) {
   this.el = document.createElement('div')

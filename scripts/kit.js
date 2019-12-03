@@ -6,9 +6,10 @@
 function Kit (name) {
   this.name = name
   this.isReady = false
-  this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4','sampler']
+  this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4', 'sampler']
   this.buffers = {}
   this.offset = 0
+  this.length = 0
 
   this.voices = [
     new Tone.Player(),
@@ -47,11 +48,10 @@ function Kit (name) {
 
   this.play = (note, vel) => {
     if (vel === 0) { return }
-    if(note < 36){
-      this.playDrum(note,vel)
-    }
-    else{
-      this.playPad(note,vel)
+    if (note < 36) {
+      this.playDrum(note, vel)
+    } else {
+      this.playPad(note, vel)
     }
   }
 
@@ -66,12 +66,12 @@ function Kit (name) {
     voice.start(undefined, this.offset)
   }
 
-  this.playPad = (note,vel) => {
+  this.playPad = (note, vel) => {
     const pad = note % 12
     const oct = Math.floor(note / 12)
     const notes = ['C', 'C#', 'D', 'D#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     const code = `${notes[pad]}${oct}`
-    this.voices[4].triggerAttack(code, undefined, vel / 127)
+    this.voices[4].triggerAttackRelease(code, this.length, undefined, vel / 127)
   }
 
   this.check = () => {
