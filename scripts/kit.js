@@ -6,7 +6,7 @@
 function Kit (name) {
   this.name = name
   this.isReady = false
-  this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4', 'sampler']
+  this.parts = ['kick', 'kick-up', 'kick-down', 'tom', 'snare', 'snare-up', 'snare-down', 'clap', 'hat', 'hat-open', 'hat-shut', 'cymb', 'fx1', 'fx2', 'fx3', 'fx4', 'synth-C2', 'synth-C4', 'synth-C6']
   this.buffers = {}
   this.offset = 0
   this.length = 0
@@ -27,7 +27,9 @@ function Kit (name) {
   }
 
   this.start = () => {
-    this.voices[4].add('C4', this.buffers.sampler)
+    this.voices[4].add('C2', this.buffers['synth-C2'])
+    this.voices[4].add('C4', this.buffers['synth-C4'])
+    this.voices[4].add('C6', this.buffers['synth-C6'])
   }
 
   this.connect = (mixer) => {
@@ -68,7 +70,7 @@ function Kit (name) {
 
   this.playPad = (note, vel) => {
     const pad = note % 12
-    const oct = Math.floor(note / 12)
+    const oct = Math.floor(note / 12) - 1
     const notes = ['C', 'C#', 'D', 'D#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     const code = `${notes[pad]}${oct}`
     this.voices[4].triggerAttackRelease(code, this.length, undefined, vel / 127)
