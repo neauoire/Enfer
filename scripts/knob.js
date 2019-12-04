@@ -64,8 +64,10 @@ function Knob (name, fn, min, max, initial = 0) {
     this.update()
   }
 
-  this.tweak = (val) => {
-    this.slider.value = parseInt((val / 127) * 100)
+  this.tweak = (val, force = false) => {
+    const res = parseInt((val / 127) * 100)
+    if (res === parseInt(this.slider.value) && force === false) { return }
+    this.slider.value = res
     this.update()
   }
 }

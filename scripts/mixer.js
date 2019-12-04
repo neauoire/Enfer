@@ -99,8 +99,9 @@ function Mixer (client) {
   }
 
   this.tweak = (ch, knob, val) => {
-    const id = Object.keys(this.knobs)[(knob - 1) % 8]
-    if (!this.knobs[id]) { return }
+    if ((knob < 0 || knob >= 8) && (knob < 64 || knob >= 72)) { return }
+    const id = Object.keys(this.knobs)[knob % 8]
+    if (!this.knobs[id]) { console.warn('Mixer', 'Unknown knob'); return }
     this.knobs[id].tweak(val)
   }
 
