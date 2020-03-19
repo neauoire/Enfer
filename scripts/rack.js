@@ -13,19 +13,19 @@ function Rack (client) {
     host.appendChild(this.el)
 
     // Drum Kits
-    this.add(new Kit('tr808'))
-    this.add(new Kit('tr909'))
-    this.add(new Kit('dmx'))
-    this.add(new Kit('dnb'))
-    this.add(new Kit('dark'))
-    this.add(new Kit('deep'))
-    this.add(new Kit('tech'))
-    this.add(new Kit('modular'))
-    this.add(new Kit('gabber'))
-    this.add(new Kit('bergh'))
-    this.add(new Kit('vermona'))
-    this.add(new Kit('commodore'))
-    this.add(new Kit('dmg'))
+    this.add(new Kit('tr808')) // saw-acid
+    this.add(new Kit('tr909')) // square-acid
+    this.add(new Kit('dmx')) // FM square
+    this.add(new Kit('dnb')) // Solid Bass(DX100)
+    this.add(new Kit('dark')) // Odyssey(Arp B)
+    this.add(new Kit('deep')) // Solina(Cello)
+    this.add(new Kit('tech')) // Attack Lead(Aelita)
+    this.add(new Kit('modular')) // Good Vibes(DX100)
+    this.add(new Kit('gabber')) // Kulak Decay(Altair 231)
+    this.add(new Kit('bergh')) // Tiny Rave(DX100)
+    this.add(new Kit('vermona')) // Funk Bass(Aelita)
+    this.add(new Kit('commodore')) // Troika Pulse(Altair 231)
+    this.add(new Kit('dmg')) // Comecon(Altair 231)
 
     // Sampler Kits
 
