@@ -15,7 +15,7 @@ function Mixer (client) {
     new Tone.EQ3(0, 0, 0)
   ]
 
-  this.cheby = new Tone.Chebyshev(5)
+  this.shaper = new Tone.Distortion(0.6)
   this.delay = new Tone.FeedbackDelay('6n', 0.5)
 
   this.eq = new Tone.EQ3(0, -5, 0)
@@ -43,7 +43,7 @@ function Mixer (client) {
     }
   }, 0, 1.0, 0.25)
 
-  this.knobs.cheby = new Knob('shaper', (v) => { this.cheby.wet.value = v }, 0, 0.5)
+  this.knobs.shaper = new Knob('shaper', (v) => { this.shaper.wet.value = v }, 0, 0.5)
   this.knobs.delay = new Knob('delay', (v) => { this.delay.wet.value = v }, 0, 1)
   this.knobs.chorus = new Knob('chorus', (v) => { this.chorus.wet.value = v }, 0, 1, 0.1)
   this.knobs['revera-dw'] = new Knob('revera-dw', (v) => { this.revera.wet.value = v }, 0, 0.3, 0.1)
@@ -72,9 +72,9 @@ function Mixer (client) {
     this.inputs[0].connect(this.eq)
     this.inputs[1].connect(this.reverb)
     this.inputs[2].connect(this.revera)
-    this.inputs[3].connect(this.cheby)
+    this.inputs[3].connect(this.shaper)
 
-    this.cheby.connect(this.revera)
+    this.shaper.connect(this.revera)
     this.revera.connect(this.chorus)
     this.chorus.connect(this.delay)
     this.delay.connect(this.reverb)
