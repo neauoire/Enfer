@@ -50,7 +50,7 @@ function Kit (name) {
 
   this.play = (note, vel) => {
     if (vel === 0) { return }
-    if (note < 36) {
+    if (note < 12) {
       this.playDrum(note, vel)
     } else {
       this.playPad(note, vel)
