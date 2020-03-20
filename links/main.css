@@ -12,11 +12,21 @@ body { background: black; color:white; font-family: 'input_mono_medium'; font-si
 #mixer { width: 408px;font-size: 12px; margin: calc(50vh - 140px) auto; }
 canvas { image-rendering: pixelated; image-rendering: optimizeSpeed; }
 .knob { float: left;width: 100px;height: 140px; position: relative; border-bottom: 2px solid white; margin-right:2px;}
-.knob svg { padding:10px; stroke:blue; stroke-width:10px; transform: rotate(90deg); stroke-linecap: round; fill:none; margin: 10px auto;display: block; position: relative;}
+.knob svg { padding:10px; stroke-width:10px; transform: rotate(90deg); stroke-linecap: round; fill:none; margin: 10px auto;display: block; position: relative;}
 .knob svg circle.bg { stroke:#fff; stroke-width:7px; }
 .knob svg circle.fg { stroke:#000; stroke-width:4px; }
 .knob span { display: block }
 .knob span.display { color: #fff;position: absolute;top: 44px;width: 100px;text-align: center;font-size: 10px; }
 .knob span.label { color: #555;position: absolute;top: 90px;width: 100px;text-align: center;font-size: 10px; }
-.knob input { display: none; }
+.knob input { display: none; position: absolute; bottom: 10px }
 .knob:hover input { display: block }
+
+/* Theme */
+
+body { background: var(--background); color: var(--f_high); }
+.knob { border-bottom-color: var(--b_low) }
+.knob:hover { border-bottom-color: var(--b_med) }
+.knob svg circle.bg { stroke: var(--b_med) }
+.knob svg circle.fg { stroke: var(--f_high) }
+.knob span.display { color: var(--f_high); }
+.knob span.label { color: var(--f_med); }

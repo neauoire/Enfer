@@ -1,6 +1,7 @@
 'use strict'
 
 /* global Acels */
+/* global Theme */
 /* global Rack */
 /* global Mixer */
 /* global IO */
@@ -9,6 +10,7 @@ function Client () {
   this.el = document.createElement('div')
 
   this.acels = new Acels(this)
+  this.theme = new Theme(this)
 
   this.io = new IO(this)
   this.rack = new Rack(this)
@@ -17,6 +19,10 @@ function Client () {
   this.channel = 0
 
   this.install = (host = document.body) => {
+    this.theme.install(host)
+
+    this.theme.default = { background: '#000000', f_high: '#ffffff', f_med: '#777777', f_low: '#444444', f_inv: '#000000', b_high: '#eeeeee', b_med: '#72dec2', b_low: '#444444', b_inv: '#ffb545' }
+
     host.appendChild(this.el)
     this.acels.set('Play', 'Test Midi', 'X', () => { this.rack.play(this.channel, 0) })
     this.acels.set('Play', 'Test Midi', 'C', () => { this.rack.play(this.channel, 1) })
@@ -48,6 +54,7 @@ function Client () {
     console.info('Client', 'Starting..')
     console.info(`${this.acels}`)
     this.mixer.setBpm(bpm)
+    this.theme.start()
   }
 
   this.modChannel = (mod) => {
