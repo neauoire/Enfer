@@ -15,7 +15,7 @@ function Mixer (client) {
     new Tone.EQ3(0, 0, 0)
   ]
 
-  this.shaper = new Tone.Distortion(0.6)
+  this.shaper = new Tone.Vibrato(2.5, 0.5)
   this.delay = new Tone.FeedbackDelay('6n', 0.5)
 
   this.eq = new Tone.EQ3(0, -5, 0)
