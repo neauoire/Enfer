@@ -1,0 +1,37 @@
+{
+  "name": "Orca",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">= 10"
+  },
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --disable-gpu",
+    "time": "node time.js",
+    "docs": "node ../docs.js",
+    "fix": "standard --fix",
+    "update": "npm update --save"
+  },
+  "devDependencies": {
+    "electron": "^8.5.3",
+    "electron-packager": "^15.1.0"
+  },
+  "dependencies": {
+    "node-osc": "^4.1.9"
+  },
+  "standard": {
+    "globals": [
+      "terminal",
+      "localStorage",
+      "DOMParser",
+      "onMessage",
+      "postMessage",
+      "FileReader",
+      "performance",
+      "Worker"
+    ],
+    "ignore": [
+      "/node_modules/*"
+    ]
+  }
+}
