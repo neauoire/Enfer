@@ -13,7 +13,7 @@
     "update": "npm update --save"
   },
   "devDependencies": {
-    "electron": "^8.5.3",
+    "electron": "^18.3.7",
     "electron-packager": "^15.1.0"
   },
   "dependencies": {
